@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#000000" >
+
+    <TextView
+        android:id="@+id/titleFileName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/titleProject"
+        android:gravity="center"
+        android:textColor="#00FF00"
+        android:textSize="25dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btTimeDiv"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/timeDivButton"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btScaleFactor"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/btTimeDiv"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/scaleFactorButton"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/graphView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/btTimeDiv"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txTimeDiv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btTimeDiv"
+            android:layout_below="@+id/btTimeDiv"
+            android:layout_marginLeft="65dp"
+            android:text="@string/timeDiv"
+            android:textColor="#00FF00"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/txScaleFactor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txTimeDiv"
+            android:layout_below="@+id/btScaleFactor"
+            android:text="@string/scaleFactor"
+            android:textColor="#00FF00"          
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btTimeDiv"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/timeDivButton"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btScaleFactor"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btTimeDiv"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/scaleFactorButton"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/graphView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/btTimeDiv"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/btTimeDiv"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txTimeDiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btTimeDiv"
+        android:layout_below="@+id/btTimeDiv"
+        android:layout_marginLeft="65dp"
+        android:text="@string/timeDiv"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#00FF00" />
+
+    <TextView
+        android:id="@+id/txScaleFactor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txTimeDiv"
+        android:layout_below="@+id/btScaleFactor"
+        android:text="@string/scaleFactor"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#00FF00" />
+
+</RelativeLayout>

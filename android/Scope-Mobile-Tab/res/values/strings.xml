@@ -1,0 +1,55 @@
+<resources>
+
+    <string name="app_name">Scope-Mobile-Tab</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Scope-Mobile</string>
+
+        <!-- Bluetooth -->
+	<string name="send">Send</string>
+	<string name="not_connected">Você não está conectado com o dispositivo.</string>
+	<string name="bt_not_enabled_leaving">Bluetooth não está habilitado. Saindo da aplicação.
+	</string>
+	<string name="title_connecting">conectando...</string>
+	<string name="title_connected_to">conectado</string>
+	<string name="title_not_connected">dispositvo não conectado</string>
+
+	<!-- DeviceListActivity -->
+	<string name="scanning">procurando por outros dispositivos...</string>
+	<string name="select_device">selecione um dispositivo para conectar</string>
+	<string name="none_paired">Nenhum dispositivo foi pareado</string>
+	<string name="none_found">Nenhum dispositivo foi encontrado</string>
+	<string name="title_paired_devices">Dispositivos Pareados</string>
+	<string name="title_other_devices">Outros Dispositivos Disponíveis</string>
+	<string name="button_scan">Procurar por Dispositivos</string>
+    
+    <!-- TextView -->
+    <string name="titleProject">Scope-Mobile</string>
+    <string name="titleGraph">Module x Time</string>
+    <string name="timeDiv">x 50</string>
+    <string name="scaleFactor">x 4</string>
+   
+    
+    <!-- Button -->
+    <string name="timeDivButton">Time Div</string>
+    <string name="scaleFactorButton">Scale Factor</string>
+    
+    
+    <!-- Toast -->
+    <string name="waitMakeExam">Faça o exame</string>
+    <string name="waitSendExam">Aguarde, os dados estão sendo enviados</string>
+    <string name="examAfterSend">primeiro faça um exame para depois enviá-lo</string>
+    <string name="connectAfterSend">conecte-se a alguma rede para enviar o email</string>
+    <string name="peakRefreshExam">refaça esse exame pois houve um problema na análise</string>
+    
+    
+   	<!-- Options Menu -->
+	<string name="connect">Conecte-se a um dispositivo</string>
+	<string name="discoverable">Torne-se detectável</string>
+	<string name="info">Sobre Scope-Mobile</string>
+    
+	<!-- BoxMessage-->
+	<string name="messageBox">Você gostaria de fazer um novo exame?</string>
+	<string name="yes">Sim</string>
+	<string name="no">Não</string>
+</resources>
