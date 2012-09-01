@@ -18,9 +18,9 @@ void loop ()
 {
  
   /*if (mySerial.available())
-    Serial.write(mySerial.read());
+    Serial.write(mySerial.read());*/
   
-  if (Serial.available())
+  /*if (Serial.available())
     mySerial.write(Serial.read());
     
   for (int j = 0; j < SIZE_ARRAY; j++)
