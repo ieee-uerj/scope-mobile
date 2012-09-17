@@ -29,7 +29,7 @@ int main (void)
 	
 	for(;;)
 	{
-		if (counter >= SIZE_ARRAY)
+		/*if (counter >= SIZE_ARRAY)
 		{
 			interruption_stop();
 			hs_writeChar(SERIAL_PORT, 'A');
@@ -47,7 +47,7 @@ int main (void)
 			}
 			counter = 0;
 			interruption_start();
-		}
+		}*/
 	}
 	
 	return 0;
@@ -93,7 +93,26 @@ void interruption_stop(void)
 
 ISR(TIMER1_COMPA_vect)
 {
-	u8Vector[counter++] = adc_read(ANALOG_0);
+	//u8Vector[counter++] = adc_read(ANALOG_0);
+	ADCBuffer[ADCCounter] = adc_read(ANALOG_0);
+
+	ADCCounter = ( ADCCounter + 1 ) % ADCBUFFERSIZE;
+
+	if ( ADCCounter >= ADCBUFFERSIZE )
+	{ /* Has buffer reached the end
+										or reached the limit?
+										Time to flush the buffer!*/
+	 	
+		hs_writeStr(SERIAL_PORT,"A%%");				
+	 	for (j = 0; j <= ADCBUFFERSIZE; j++)
+	 	{
+			sprintf(strValue, "%d%%", ADCBuffer[j]);
+			hs_writeStr(SERIAL_PORT,strValue);
+
+		}
+		ADCCounter = 0;
+	}
+
 }
 
 	
