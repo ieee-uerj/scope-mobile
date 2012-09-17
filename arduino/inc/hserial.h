@@ -14,7 +14,7 @@
 #include <inttypes.h>
 #include <stdio.h>
 
-#include "globals.h"
+#include "global.h"
 
 #define RX_BUFFER_SIZE 128
 

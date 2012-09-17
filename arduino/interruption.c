@@ -4,7 +4,7 @@
 #include "adc.h"
 #include "hserial.h"
 
-#define SIZE_ARRAY 100	
+#define SIZE_ARRAY 101
 
 void interruption_setup(void);
 void interruption_start(void);
@@ -39,7 +39,7 @@ int main (void)
 				sprintf(strValue, "%d", u8Vector[j]);
 				hs_writeStr(SERIAL_PORT,strValue);
 				hs_writeChar(SERIAL_PORT, '%');
-				//_delay_ms(40);
+				_delay_ms(40);
 			} 
 			for (j = 0; j < SIZE_ARRAY; j++)
 			{
