@@ -1,4 +1,4 @@
-avr-gcc -Os -DF_CPU=16000000UL -I. -mmcu=atmega328p $1.c adc.c hserial.c -o $1
+avr-gcc -Os -DF_CPU=16000000UL -I./inc -mmcu=atmega328p $1.c adc.c hserial.c -o $1
 avr-objcopy -O ihex -R .eeprom $1 $1.hex
 #avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyUSB0 -b 115200 -U flash:w:$1.hex #UNO
 avrdude -F -V -c arduino -p ATMEGA328P -P $2 -b 57600 -U flash:w:$1.hex #DUEMILINOVA
