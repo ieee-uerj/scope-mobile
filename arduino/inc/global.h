@@ -10,8 +10,12 @@
 #define BAUD 57600
 
 #define ADCBUFFERSIZE 1280
+#define WAIT_DURATION 32
+
 volatile uint8_t ADCBuffer[ADCBUFFERSIZE];
 volatile int ADCCounter;
-
+volatile int wait;
+volatile int freeze;
+volatile int stopIndex;
 
 #endif

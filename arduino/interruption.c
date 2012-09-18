@@ -3,6 +3,7 @@
 
 #include "adc.h"
 #include "hserial.h"
+#include "global.h"
 
 #define SIZE_ARRAY 101
 
@@ -48,6 +49,13 @@ int main (void)
 			counter = 0;
 			interruption_start();
 		}*/
+		if (freeze)
+		{
+			Serial.write( (uint8_t *)ADCBuffer + ADCCounter, ADCBUFFERSIZE - ADCCounter );
+			Serial.write( (uint8_t *)ADCBuffer, ADCCounter );
+			wait = 0;
+			freeze = 0;
+		}
 	}
 	
 	return 0;
@@ -98,21 +106,27 @@ ISR(TIMER1_COMPA_vect)
 
 	ADCCounter = ( ADCCounter + 1 ) % ADCBUFFERSIZE;
 
-	if ( ADCCounter >= ADCBUFFERSIZE )
-	{ /* Has buffer reached the end
-										or reached the limit?
-										Time to flush the buffer!*/
-	 	
-		hs_writeStr(SERIAL_PORT,"A%%");				
-	 	for (j = 0; j <= ADCBUFFERSIZE; j++)
-	 	{
-			sprintf(strValue, "%d%%", ADCBuffer[j]);
-			hs_writeStr(SERIAL_PORT,strValue);
+	if ( wait )
+	{
+		if ( stopIndex == ADCCounter )
+		{
+			// Freeze situation
+			// Disable ADC and stop Free Running Conversion Mode
+			ADCSRA &= ~(1<<ADEN);
 
+			freeze = 1;
 		}
-		ADCCounter = 0;
 	}
 
+}
+
+ISR(ANALOG_COMP_vect)
+{
+	// Disable Analog Comparator interrupt
+	cbi( ACSR,ACIE );
+
+	wait = 1;
+	stopIndex = ( ADCCounter + WAIT_DURATION ) % ADCBUFFERSIZE;
 }
 
 	
