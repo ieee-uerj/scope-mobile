@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <avr/interrupt.h>
 
 #define OWNER
@@ -10,9 +11,9 @@
 #include "adc.h"
 
 int j;
-static char *strValue;
+static char strValue[3] = "";
 
-int main (int c, char *argv[]) {
+int main (void) {
 	
 	setupADC();
 
@@ -43,7 +44,7 @@ int main (int c, char *argv[]) {
 			startTimerInterruption();
 		}
 	}
-	
+
 	return 0;
 }
 
