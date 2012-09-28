@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <avr/interrupt.h>
 
 #define OWNER
@@ -13,7 +12,7 @@
 int j;
 static char strValue[3] = "";
 
-int main (void) {
+int main (int argc, char * argv[]) {
 	
 	setupADC();
 
