@@ -8,12 +8,15 @@
  *   Based off: HardwareSerial.h
  */
 
-#ifndef HSERIAL_H_
-#define HSERIAL_H_
+#ifndef __HSERIAL_H__
+#define __HSERIAL_H__
 
 #include <inttypes.h>
 #include <stdio.h>
 
+#ifdef OWNER
+#undef OWNER
+#endif
 #include "global.h"
 
 #define RX_BUFFER_SIZE 128

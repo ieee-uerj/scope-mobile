@@ -1,42 +1,49 @@
-/*********************************************************
-This is the handle to interruptions. No matter what kind
-of interruption you are dealing with, put its handler here.
-**********************************************************/
+/*
+General setup for interruptions
+*/
 
-#ifdef OWNER
-#undef OWNER
-#endif
+#include "interruptions.h"
 
-#include <global.h>
-#include <SoftwareSerial.h>
-
-uint8_t low = 0x00;
-uint8_t high = 0x00;
-uint16_t digital = 0x0000;
-
-ISR(TIMER1_COMPA_vect)
+void setupTimerInterruption(void)
 {
-  intArray[counter++] = analogRead(A0);
+	//(target time) = (timer resolution) * (# timer counts + 1) -> # timer counts
+    // initialize Timer1 48kHz
+    cli();          // disable global interrupts
+    
+    TCCR1A = 0;     // set entire TCCR1A register to 0
+    TCCR1B = 0;     // same for TCCR1B
+ 
+    // set compare match register to desired timer count:
+    OCR1A = 40;
+    //OCR1A = 15624;
+			
+    // turn on CTC mode:
+    TCCR1B |= (1 << WGM12);
+    
+    // Set CS11 bits for 8 prescaler:
+    //TCCR1B |= (1 << CS10);
+    TCCR1B |= (1 << CS11); 
+    //TCCR1B |= (1 << CS12);
+    
+    // enable timer compare interrupt:
+    TIMSK1 |= (1 << OCIE1A);
+    
+    sei();          // enable global interrupts  
 }
 
-ISR(ADC_vect)
+void startTimerInterruption(void)
 {
-	// When ADCL is read, the ADC Data Register is not updated until ADCH
-	// is read. Consequently, if the result is left adjusted and no more
-	// than 8-bit precision is required, it is sufficient to read ADCH.
-	// Otherwise, ADCL must be read first, then ADCH.
+  TIMSK1 |= (1 << OCIE1A);
+}
 
-	low = ADCL;
-	high = ADCH;
-	digital = (high << 8) + low;
+void stopTimerInterruption(void)
+{
+  TIMSK1 = 0;
+}
 
-	ADCBuffer[ADCCounter] = digital;
-
-	ADCCounter = ( ADCCounter + 1 ) % ADCBUFFERSIZE;
-
-	if ( (ADCCounter == 0 ) || (counter >= SIZE_ARRAY) ){ /* Has buffer reached the end
-														  or reached the limit?
-														  Time to flush the buffer!*/
-		Serial.write( (uint16_t *)ADCBuffer, ADCBUFFERSIZE );
-	}
+// initialize adc
+void setupADC()
+{
+    ADMUX = (1 << ADLAR)|(1 << REFS0); // Set 8 bits resolution and set AREF = AVcc - 5V  
+    ADCSRA = (1 << ADEN)|(1 << ADPS2)|(0 << ADPS1)|(0 << ADPS0); // Set prescaler (16MHz/16 =  1000kHz) and enable ADC (ADEN)  - FAST ADC
 }

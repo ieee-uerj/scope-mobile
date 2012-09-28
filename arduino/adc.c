@@ -1,12 +1,5 @@
 #include "adc.h"
 
-// initialize adc
-void adc_init(void)
-{
-    ADMUX = (1 << ADLAR)|(1 << REFS0); // Set 8 bits resolution and set AREF = AVcc - 5V  
-    ADCSRA = (1 << ADEN)|(1 << ADPS2)|(0 << ADPS1)|(0 << ADPS0); // Set prescaler (16MHz/16 =  1000kHz) and enable ADC (ADEN)  - FAST ADC
-}
-
 // read adc value
 uint8_t adc_read(uint8_t channel)
 {

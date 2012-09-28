@@ -1,9 +1,12 @@
-#ifndef _ADC_H_
-#define _ADC_H_
+#ifndef __ADC_H_
+#define __ADC_H__
+
+#ifdef OWNER
+#undef OWNER
+#endif
 
 #include "global.h"
 
-void adc_init(void);
 uint8_t adc_read(uint8_t channel);
 
 #endif
