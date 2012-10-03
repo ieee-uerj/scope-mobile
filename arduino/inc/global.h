@@ -1,12 +1,5 @@
-/*
-This is the global header. If you want to declare a global variable, put it here.
-The DEFINE OWNER macro is used to set the owner of global variables.
-*/
-
-#include <Arduino.h>
-
-#ifndef __GLOBAL_H__	/* include guard */
-#define __GLOBAL_H__
+#include <avr/io.h>
+#include <util/delay.h>
 
 #ifdef OWNER
 #define EXTERN
@@ -14,12 +7,21 @@ The DEFINE OWNER macro is used to set the owner of global variables.
 #define EXTERN extern	/* declares external variables */
 #endif
 
+#define ANALOG_0 0
+
+#define SERIAL_PORT 0	
+#define BAUD 57600
+
 #define ADCBUFFERSIZE 1280
+#define WAIT_DURATION 32
+
 #define SIZE_ARRAY 101
-#define BAUDRATE 115200
 
-EXTERN volatile uint16_t ADCBuffer[ADCBUFFERSIZE];
-EXTERN volatile int intArray[SIZE_ARRAY];
+EXTERN volatile uint8_t ADCBuffer[ADCBUFFERSIZE];
+EXTERN volatile int ADCCounter;
+EXTERN volatile int wait;
+EXTERN volatile int freeze;
+EXTERN volatile int stopIndex;
 EXTERN volatile int counter;
-
-#endif
+EXTERN uint8_t u8Value;
+EXTERN uint8_t u8Vector[SIZE_ARRAY];

@@ -1,38 +1,44 @@
 /*
-Functions' prototypes
+Interruption Functions' prototypes
 */
-#ifndef __PROTOTYPES_H__		/* include guard */
-#define __PROTOTYPES_H__
+#ifndef __INTERRUPTIONS_H__		/* include guard */
+#define __INTERRUPTIONS_H__
 
+#ifdef OWNER
+#undef OWNER
+#endif
+
+#include <avr/interrupt.h>
+#include "global.h"
 
 /* 	Initial setup of timer interruption    *
  *  Parameters:  nothing                   *
  *  Returns:     nothing                   */
 void setupTimerInterruption();
 
-/* 	Stop timer interruption	        *
- *  Parameters:  nothing            *
- *  Returns:     nothing            */
-void stopTimerInterruption();
-
 /* 	Start timer interruption		*
  *  Parameters:  nothing            *
  *  Returns:     nothing            */
 void startTimerInterruption();
 
+/* 	Stop timer interruption	        *
+ *  Parameters:  nothing            *
+ *  Returns:     nothing            */
+void stopTimerInterruption();
+
 /* 	Initial setup of interruptions  *
  *  Parameters:  nothing            *
  *  Returns:     nothing            */
-void setupADC(void);
+void setupADC();
 
 /* 	Start ADC Interruption  		*
  *  Parameters:  nothing            *
  *  Returns:     nothing            */
-void startADC( void );
+void startADC();
 
 /* 	Stop ADC Interruption 			*
  *  Parameters:  nothing            *
  *  Returns:     nothing            */
-void stopADC( void );
+void stopADC();
 
 #endif
