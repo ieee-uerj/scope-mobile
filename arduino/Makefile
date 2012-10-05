@@ -32,7 +32,8 @@ CFLAGS = -Os
 CINCS = -I./inc
 BIN = bin/scope
 HEX = hex/scope.hex
-MKDIR_P = mkdir -p bin hex
+MKDIR_P = mkdir -p bin/ hex/
+RM_RF = rm -rf bin/ hex/
 	
 #Upload Settings
 AVRDUDE_PROGRAMMER = stk500
@@ -52,3 +53,6 @@ upload-uno:
 
 upload-duemilanove:
 	$(AVRDUDE) $(AVRDUDE_FLAGS) -c $(AVRDUDE_PROGRAMMER) -p $(MCU) -P $(AVR_PORT) -b $(UPLOAD_RATE_DUEMILANOVE) $(AVRDUDE_FLASH)
+
+clean:
+	$(RM_RF)
