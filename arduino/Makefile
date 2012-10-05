@@ -12,7 +12,7 @@
 #### 1. Type "make" and press enter to compile/verify your program
 #### 2. Check the USB port and change "PORT" value in makefile (/dev/*)
 #### 3. Type "make upload-*" and press enter upload your program to the 
-####    Arduino board. If you're using arduino UNO, type make upload-uno
+####    Arduino board. If you're using arduino UNO, type "make upload-uno"
 ###############################################################################
 ###############################################################################
 
