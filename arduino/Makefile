@@ -36,7 +36,7 @@ MKDIR_P = mkdir -p bin/ hex/
 RM_RF = rm -rf bin/ hex/
 	
 #Upload Settings
-AVRDUDE_PROGRAMMER = stk500
+AVRDUDE_PROGRAMMER = arduino
 AVR_PORT = /dev/ttyUSB0
 AVRDUDE_FLAGS = -F -V 
 AVRDUDE_FLASH = -U flash:w:$(HEX)
