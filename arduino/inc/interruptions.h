@@ -11,6 +11,13 @@ Interruption Functions' prototypes
 #include <avr/interrupt.h>
 #include "global.h"
 
+#ifndef cbi
+#define cbi(reg, bit) (_SFR_BYTE(reg) &= ~_BV(bit))
+#endif
+#ifndef sbi
+#define sbi(reg, bit) (_SFR_BYTE(reg) |= _BV(bit))
+#endif
+
 /* 	Initial setup of timer interruption    *
  *  Parameters:  nothing                   *
  *  Returns:     nothing                   */
