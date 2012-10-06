@@ -46,7 +46,7 @@ void setupADC()
     ADCSRA = (1 << ADEN)|(1 << ADPS2)|(0 << ADPS1)|(0 << ADPS0); // Set prescaler (16MHz/16 =  1000kHz) and enable ADC (ADEN)  - FAST ADC
 }
 
-void initAnalogComparator(void)
+void setupAnalogComparator(void)
 {
     /*
         Switch on analog comparator power.

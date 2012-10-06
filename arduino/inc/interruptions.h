@@ -11,6 +11,8 @@ Interruption Functions' prototypes
 #include <avr/interrupt.h>
 #include "global.h"
 
+#define _BV(n) (1 << n) /*_BV() is not standard and non portable.*/
+
 #ifndef cbi
 #define cbi(reg, bit) (_SFR_BYTE(reg) &= ~_BV(bit))
 #endif
@@ -47,5 +49,10 @@ void startADC();
  *  Parameters:  nothing            *
  *  Returns:     nothing            */
 void stopADC();
+
+/* 	Initial setup of Analog Comparator *
+ *  Parameters:  nothing               *
+ *  Returns:     nothing               */
+void setupAnalogComparator();
 
 #endif

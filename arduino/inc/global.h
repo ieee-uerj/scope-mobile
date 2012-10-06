@@ -13,13 +13,10 @@
 #define BAUD 57600
 
 #define ADCBUFFERSIZE 1280
-#define WAIT_DURATION 32
 
 #define SIZE_ARRAY 101
+#define WAIT_DURATION SIZE_ARRAY - 32
 
-EXTERN volatile uint8_t ADCBuffer[ADCBUFFERSIZE];
-EXTERN volatile int ADCCounter;
-EXTERN volatile int wait;
 EXTERN volatile int freeze;
 EXTERN volatile int stopIndex;
 EXTERN volatile int counter;
