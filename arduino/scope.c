@@ -27,7 +27,6 @@ int main (int argc, char * argv[]) {
 			stopTimerInterruption();
 			hs_writeChar(SERIAL_PORT, 'A');
 			hs_writeBuffer(SERIAL_PORT, u8Vector, SIZE_ARRAY);
-			_delay_ms(100);
 			counter = 0;
 			startTimerInterruption();
 		}
