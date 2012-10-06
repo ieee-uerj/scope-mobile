@@ -309,50 +309,35 @@ public class BluetoothService {
 		public void run() {
 			Log.i(Globals.TAG, "BEGIN mConnectedThread");
 			byte[] buffer = new byte[1024];
+			double[] intValues = new double[500];
 			int bytes;
 
+			int counter = 0;
 			// Keep listening to the InputStream while connected
-			while (true) {
+			while (true) 
+			{
 				try {
-					// Read from the InputStream
 					bytes = mmInStream.read(buffer);
-//					mHandler.obtainMessage(Globals.MESSAGE_READ, bytes, -1, buffer).sendToTarget();
-
-	                String readMessage = new String(buffer, 0, bytes);                	                
-	                String readMessageAux = new String(readMessage);
-	              
-	                while (readMessageAux.indexOf('%') != -1)
-	                {
-	                	String vAux = aux + readMessageAux.substring(0, readMessageAux.indexOf('%'));
-	                	Log.i(Globals.TAG, "readMessage: "+ vAux); //vector
-	                	if(vAux.compareTo("A") == 0)
-	                		counter = 0;
-	                	else
-	                		display[counter++] = Double.parseDouble(vAux);
-	                	
-	                	Log.i(Globals.TAG,"LOG: "+ counter);
-	                	aux = "";
-	                	if(readMessageAux.lastIndexOf('%') < readMessageAux.length() - 1)
-	                		readMessageAux = readMessageAux.substring(readMessageAux.indexOf('%') + 1);
-	                	else
-	                		readMessageAux = "";
-	                }
-	                
-	                if(readMessageAux.indexOf('%') == -1 && readMessageAux.length() > 0)
-	                {
-	                    aux +=  readMessageAux;
-	                }
-	                
-	                if (counter >= SIZE)
-	                {
-	                	counter = 0;
-	                	mHandler.obtainMessage(Globals.MESSAGE_READ, bytes, -1,display).sendToTarget();
-	                	display = new double[SIZE];
-	                }
+					
+					for (int i = 0; i < bytes; i ++)
+					{
+						if (buffer[i] == 'A')
+						{	
+							Log.i(Globals.TAG, "Valor Final do Counter: "+(counter));
+							counter = 0;
+							mHandler.obtainMessage(Globals.MESSAGE_READ, counter, -1, intValues).sendToTarget();
+						}
+						else
+						{
+							int cast = (int)(buffer[i] & 0xff);
+							
+							Log.i(Globals.TAG, "Valor Conversor A/D: "+cast);
+							intValues[counter] = cast;
+							Log.i(Globals.TAG, "Valor do Counter: "+(counter++));
+						}
+					}
 				} catch (IOException e) {
-					Log.e(Globals.TAG, "disconnected", e);
-					connectionLost();
-					break;
+					e.printStackTrace();
 				}
 			}
 		}	
