@@ -55,4 +55,14 @@ void stopADC();
  *  Returns:     nothing               */
 void setupAnalogComparator();
 
+/* 	Start Analog Comparator Interruption *
+ *  Parameters:  nothing            	 *
+ *  Returns:     nothing            	 */
+void startAnalogComparator(void);
+
+/* 	Stop Analog Comparator Interruption  *
+ *  Parameters:  nothing            	 *
+ *  Returns:     nothing            	 */
+void stopAnalogComparator(void);
+
 #endif

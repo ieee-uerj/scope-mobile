@@ -24,12 +24,16 @@ int main (int argc, char * argv[]) {
 	
 	hs_start(SERIAL_PORT, BAUD);
 	setupTimerInterruption();
+
+	setupAnalogComparator();
+	startAnalogComparator();
 	
 	for(;;)
 	{
 		if (freeze)
 		{
 			stopTimerInterruption();
+			stopAnalogComparator();
 			hs_writeChar(SERIAL_PORT, 'A');
 			hs_writeChar(SERIAL_PORT,'%');
 			for (j = 0; j < SIZE_ARRAY; j++)
@@ -46,6 +50,7 @@ int main (int argc, char * argv[]) {
 			counter = 0;
 			stopIndex = -1;
 			freeze = 0;
+			startAnalogComparator();
 			startTimerInterruption();
 		}
 	}

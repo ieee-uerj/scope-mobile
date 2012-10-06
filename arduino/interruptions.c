@@ -51,39 +51,51 @@ void setupAnalogComparator(void)
     /*
         Switch on analog comparator power.
     */
-    cbi(ACSR,ACD);
+    cbi(ACSR, ACD);
 
     /*
         Not using Bandgap voltage reference.
         Using AIN0 in positive input of comparator.
         See Page 247 of datasheet for more details.
     */
-    cbi(ACSR,ACBG);
+    cbi(ACSR, ACBG);
 
     /*
         Everytime you change ACD bit, you MUST disable AC Interrupt.
         If you do not do this, an interrupt can occur.
         See Page 247 for more details.
     */
-    cbi(ACSR,ACIE);
+    cbi(ACSR, ACIE);
 
     /*
         Disable input capture function in Timer/Counter1
         to be triggered by AC. (Figure 22-1 on page 246)
     */
-    cbi(ACSR,ACIC);
+    cbi(ACSR, ACIC);
 
     /*
         These bits determine which comparator events that
         trigger the Analog Comparator interrupt.
         Rising edge in this case.
     */
-    sbi(ACSR,ACIS1);
-    sbi(ACSR,ACIS0);
+    sbi(ACSR, ACIS1);
+    sbi(ACSR, ACIS0);
 
     /*
         Disable digital input buffer from AIN0/1 to reduce power consumption.
     */
-    sbi(DIDR1,AIN1D);
-    sbi(DIDR1,AIN0D);
+    sbi(DIDR1, AIN1D);
+    sbi(DIDR1, AIN0D);
+}
+
+void startAnalogComparator(void)
+{
+    /* Enable Analog Comparator Interrupt */
+    sbi(ACSR, ACIE);
+}
+
+void stopAnalogComparator(void)
+{
+    /* Disable Analog Comparator interrupt */
+    cbi(ACSR, ACIE);
 }
