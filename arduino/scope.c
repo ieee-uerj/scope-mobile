@@ -35,7 +35,6 @@ int main (int argc, char * argv[]) {
 			stopAnalogComparator();
 			hs_writeChar(SERIAL_PORT, 'A');
 			hs_writeBuffer(SERIAL_PORT, u8Vector, SIZE_ARRAY);
-			_delay_ms(100);
 			counter = 0;
 			stopIndex = -1;
 			freeze = 0;
