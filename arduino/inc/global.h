@@ -15,7 +15,7 @@
 #define ADCBUFFERSIZE 1280
 #define WAIT_DURATION 32
 
-#define SIZE_ARRAY 101
+#define SIZE_ARRAY 500
 
 EXTERN volatile uint8_t ADCBuffer[ADCBUFFERSIZE];
 EXTERN volatile int ADCCounter;

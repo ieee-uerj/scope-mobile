@@ -10,7 +10,6 @@
 #include "adc.h"
 
 int j;
-static char strValue[3] = "";
 
 int main (int argc, char * argv[]) {
 	
@@ -27,18 +26,8 @@ int main (int argc, char * argv[]) {
 		{
 			stopTimerInterruption();
 			hs_writeChar(SERIAL_PORT, 'A');
-			hs_writeChar(SERIAL_PORT,'%');
-			for (j = 0; j < SIZE_ARRAY; j++)
-			{
-				sprintf(strValue, "%d", u8Vector[j]);
-				hs_writeStr(SERIAL_PORT,strValue);
-				hs_writeChar(SERIAL_PORT, '%');
-				_delay_ms(40);
-			} 
-			for (j = 0; j < SIZE_ARRAY; j++)
-			{
-				u8Vector[j] = 0; 
-			}
+			hs_writeBuffer(SERIAL_PORT, u8Vector, SIZE_ARRAY);
+			_delay_ms(100);
 			counter = 0;
 			startTimerInterruption();
 		}

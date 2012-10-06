@@ -1,6 +1,7 @@
 package br.uerj.eng.ieee.scopemobile.graph;
 
 import android.content.Context;
+import android.graphics.Color;
 import br.uerj.eng.ieee.scopemobile.R;
 import br.uerj.eng.ieee.scopemobile.utils.Globals;
 
@@ -27,7 +28,7 @@ public class GraphLayout {
 		graphView = new LineGraphView(mContext
 		      , mContext.getString(R.string.titleGraph) 
 		);  
-		graphView.addSeries(new GraphViewSeries(data));  
+		graphView.addSeries(new GraphViewSeries("Scope-Mobile Graph",Color.GREEN,data));  
 		graphView.setViewPort(Globals.X_AXYS_MIN, Globals.X_AXYS_MAX);  
 		graphView.setScrollable(true); 
 		graphView.setScalable(true);  
@@ -43,7 +44,7 @@ public class GraphLayout {
 		graphView = new LineGraphView(mContext
 				, mContext.getString(R.string.titleGraph) 
 				);  
-		graphView.addSeries(new GraphViewSeries(data));  
+		graphView.addSeries(new GraphViewSeries("Scope-Mobile Graph",Color.GREEN,data));  
 		graphView.setViewPort(Globals.X_AXYS_MIN, Globals.X_AXYS_MAX);  
 		graphView.setScrollable(true); 
 		graphView.setScalable(true);  
