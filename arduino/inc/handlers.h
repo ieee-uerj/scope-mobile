@@ -8,6 +8,16 @@
 
 #include "adc.h"
 
+#define _BV(n) (1 << n) /*_BV() is not standard and non portable.*/
+
+#ifndef cbi
+#define cbi(reg, bit) (_SFR_BYTE(reg) &= ~_BV(bit))
+#endif
+#ifndef sbi
+#define sbi(reg, bit) (_SFR_BYTE(reg) |= _BV(bit))
+#endif
+
 void timer_isr();
+void comparator_isr();
 
 #endif

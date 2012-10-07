@@ -13,6 +13,10 @@ int j;
 static char strValue[3] = "";
 
 int main (int argc, char * argv[]) {
+
+	counter = 0;
+	stopIndex = -1;
+	freeze = 0;
 	
 	setupADC();
 
@@ -20,12 +24,16 @@ int main (int argc, char * argv[]) {
 	
 	hs_start(SERIAL_PORT, BAUD);
 	setupTimerInterruption();
+
+	setupAnalogComparator();
+	startAnalogComparator();
 	
 	for(;;)
 	{
-		if (counter >= SIZE_ARRAY)
+		if (freeze)
 		{
 			stopTimerInterruption();
+			stopAnalogComparator();
 			hs_writeChar(SERIAL_PORT, 'A');
 			hs_writeChar(SERIAL_PORT,'%');
 			for (j = 0; j < SIZE_ARRAY; j++)
@@ -40,6 +48,9 @@ int main (int argc, char * argv[]) {
 				u8Vector[j] = 0; 
 			}
 			counter = 0;
+			stopIndex = -1;
+			freeze = 0;
+			startAnalogComparator();
 			startTimerInterruption();
 		}
 	}
@@ -50,6 +61,11 @@ int main (int argc, char * argv[]) {
 ISR(TIMER1_COMPA_vect)
 {
     timer_isr();
+}
+
+ISR(ANALOG_COMP_vect)
+{
+	comparator_isr();
 }
 
 	
