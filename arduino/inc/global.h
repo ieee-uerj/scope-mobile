@@ -12,8 +12,6 @@
 #define SERIAL_PORT 0	
 #define BAUD 57600
 
-#define ADCBUFFERSIZE 1280
-
 #define SIZE_ARRAY 500
 #define WAIT_DURATION SIZE_ARRAY - 32
 
