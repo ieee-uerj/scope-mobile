@@ -14,7 +14,7 @@
 
 #define ADCBUFFERSIZE 1280
 
-#define SIZE_ARRAY 101
+#define SIZE_ARRAY 500
 #define WAIT_DURATION SIZE_ARRAY - 32
 
 EXTERN volatile int freeze;

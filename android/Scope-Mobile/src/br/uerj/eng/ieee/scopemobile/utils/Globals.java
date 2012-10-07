@@ -31,9 +31,9 @@ public class Globals {
 	public static final int STATE_CONNECTED = 3;  // now connected to a remote device
 	
 	//Data
-	public static final int NUMBER_DATA = 100;
+	public static final int NUMBER_DATA = 500;
 	public static final float FACTOR_MULTIPLY = 1f;
 	public static final float X_AXYS_MIN = 0.000f;
-	public static final float X_AXYS_MAX = 100.000f;
+	public static final float X_AXYS_MAX = 500.000f;
 	
 }

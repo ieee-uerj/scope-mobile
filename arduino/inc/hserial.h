@@ -57,5 +57,6 @@ void hs_flush(const int port); 						// Flushes the contents on the serial port.
 int hs_getChar(const int port);						// Gets next character (rx) on serial port.
 void hs_writeChar(const int port, uint8_t c);		// Write a character (tx) on serial port.
 void hs_writeStr(const int port, const char str[]); // Write a string to serial port (tx).
+void hs_writeBuffer(const int port, uint8_t buffer[], int length); //Write a byte buffer to serial port (tx)
 
 #endif /* HSERIAL_H_ */

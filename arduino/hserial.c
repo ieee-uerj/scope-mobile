@@ -181,6 +181,14 @@ void hs_writeChar(const int port, uint8_t c){
 	*(Serial_[port].udr) = c;
 }
 
+void hs_writeBuffer(const int port, uint8_t buffer[], int length){
+	int i;
+	for(i = 0; i < length; i++)
+	{
+		 hs_writeChar(port, buffer[i]);
+	}
+}
+
 void hs_writeStr(const int port, const char str[]){
 	hs_parseStr(port, str);
 }

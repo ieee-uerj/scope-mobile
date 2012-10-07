@@ -200,71 +200,9 @@ public class Main extends Activity {
                 }
                 break;
 			case Globals.MESSAGE_READ:
-				
 				double[] readBuf =  (double[]) msg.obj;
 				layout.removeAllViews();
             	layout.addView(graphLayout.refreshGraph(readBuf));
-
-            	
-            	//				byte[] readBuf = (byte[]) msg.obj;
-//                String readMessage = new String(readBuf, 0, msg.arg1);                
-//                fileCreator2.AddNewLine(readMessage);
-//                //Log.i(Globals.TAG, "readMessage: "+readMessage);
-//                
-//                String readMessageAux = new String(readMessage);
-//                
-//                while (readMessageAux.indexOf('%') != -1)
-//                {
-//                	String vAux = aux + readMessageAux.substring(0, readMessageAux.indexOf('%'));
-//                	Log.i(Globals.TAG, "readMessage: "+ vAux); //vector
-//                	aux = "";
-//                	if(readMessageAux.lastIndexOf('%') < readMessageAux.length() - 1)
-//                		readMessageAux = readMessageAux.substring(readMessageAux.indexOf('%') + 1);
-//                	else
-//                		readMessageAux = "";
-//                }
-//                
-//                if(readMessageAux.indexOf('%') == -1 && readMessageAux.length() > 0)
-//                {
-//                    aux +=  readMessageAux;
-//                }
-//                
-//                try
-//                {
-//                	Double.parseDouble(readMessage);
-//                } catch (NumberFormatException e) {
-//                	Log.i(Globals.TAG, "ERRO");
-//                }
-                /*
-                int lastPercent = 0;
-                
-                if (readMessage.length() > 3)
-                {
-                	for (int i = 0; i < readMessage.length(); i++)
-                	{
-                		if (readMessage.charAt(i) == '%')
-                		{
-                			lastPercent = i;
-                		}
-                	}
-                	if (lastPercent != 0 && readMessage.charAt(0) == '%')
-            		{
-                		Log.i(Globals.TAG, "readMessage: " + readMessage.substring(0, lastPercent));
-            			stringBuffer.append(readMessage.substring(0, lastPercent));
-            		}
-                }
-                if (stringBuffer.length() > 300)
-                {
-                	Globals.lock = false;
-                	Log.i(Globals.TAG, "CAIU AQUIIIIIIIIIIIIIIIIIIIII (stop)");
-                	fileCreator.AddNewLine(stringBuffer.substring(1).toString().replaceAll("%", "\n"));
-                	fileCreator.fileToArray();
-                	layout.removeAllViews();
-                	layout.addView(graphLayout.refreshGraph(fileCreator.getAllIntValuesFromFile()));
-                	fileCreator.clearFile();
-                	stringBuffer = new StringBuffer();
-                	Globals.lock =  true;
-                }*/
                 break;
 			}
 		};
