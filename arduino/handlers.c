@@ -6,12 +6,18 @@ Handlers to interruptions
 
 void timer_isr()
 {
-	if (++counter >= SIZE_ARRAY) counter = 0;
+    
     u8Vector[counter] = adc_read(ANALOG_0);
+
+	if (++counter >= SIZE_ARRAY) 
+	{
+		counter = 0;
+		freeze = 1;
+	}
 
     if (stopIndex == counter)
 	{
-		cbi(ADCSRA, ADEN);
+		//cbi(ADCSRA, ADEN);
 		freeze = 1;
 	}
 }

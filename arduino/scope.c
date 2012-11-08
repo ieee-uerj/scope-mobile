@@ -10,12 +10,19 @@
 #include "adc.h"
 
 int j;
+int liga = 0;
 
 int main (int argc, char * argv[]) {
 
 	counter = 0;
 	stopIndex = -1;
 	freeze = 0;
+
+	DDRB = 0b00100000;
+	setupAnalogComparator();
+	sei();
+	startAnalogComparator();
+
 	
 	setupADC();
 
@@ -23,24 +30,22 @@ int main (int argc, char * argv[]) {
 	
 	hs_start(SERIAL_PORT, BAUD);
 	setupTimerInterruption();
-
-	setupAnalogComparator();
-	startAnalogComparator();
 	
 	for(;;)
 	{
-		if (freeze)
+		/*if (freeze)
 		{
 			stopTimerInterruption();
 			stopAnalogComparator();
-			hs_writeChar(SERIAL_PORT, 'A');
+			// hs_writeChar(SERIAL_PORT, 'A');
 			hs_writeBuffer(SERIAL_PORT, u8Vector, SIZE_ARRAY);
+			_delay_ms(100);
 			counter = 0;
 			stopIndex = -1;
 			freeze = 0;
 			startAnalogComparator();
 			startTimerInterruption();
-		}
+		}*/
 	}
 
 	return 0;
@@ -53,7 +58,14 @@ ISR(TIMER1_COMPA_vect)
 
 ISR(ANALOG_COMP_vect)
 {
-	comparator_isr();
+	//comparator_isr();
+	if bit_is_clear(ACSR, ACO){
+
+		cbi(PORTB, PORTB5);
+	}else{
+
+		sbi(PORTB, PORTB5);
+	}
 }
 
 	

@@ -1,3 +1,4 @@
+#include <avr/interrupt.h>
 /*
 General setup for interruptions
 */
@@ -14,14 +15,17 @@ void setupTimerInterruption(void)
     TCCR1B = 0;     // same for TCCR1B
  
     // set compare match register to desired timer count:
-    OCR1A = 40;
+    OCR1A = 15624;
     //OCR1A = 15624;
 			
     // turn on CTC mode:
     sbi(TCCR1B, WGM12);
 
     // prescaler = 8
-    sbi(TCCR1B, CS11);
+    //sbi(TCCR1B, CS11);
+
+    TCCR1B |= (1 << CS10);
+    TCCR1B |= (1 << CS12);
 
     // enable timer compare interrupt:
     sbi(TIMSK1, OCIE1A);
@@ -58,7 +62,11 @@ void setupAnalogComparator(void)
         Using AIN0 in positive input of comparator.
         See Page 247 of datasheet for more details.
     */
-    cbi(ACSR, ACBG);
+    sbi(ACSR, ACBG);
+
+    /*AIN1 as negative input of comparator*/
+    sbi(ADCSRA, ADEN);
+
 
     /*
         Everytime you change ACD bit, you MUST disable AC Interrupt.
@@ -78,8 +86,8 @@ void setupAnalogComparator(void)
         trigger the Analog Comparator interrupt.
         Rising edge in this case.
     */
-    sbi(ACSR, ACIS1);
-    sbi(ACSR, ACIS0);
+    cbi(ACSR, ACIS1);
+    cbi(ACSR, ACIS0);
 
     /*
         Disable digital input buffer from AIN0/1 to reduce power consumption.

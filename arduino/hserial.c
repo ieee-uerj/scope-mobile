@@ -185,7 +185,7 @@ void hs_writeBuffer(const int port, uint8_t buffer[], int length){
 	int i;
 	for(i = 0; i < length; i++)
 	{
-		 hs_writeChar(port, buffer[i]);
+		hs_writeChar(port, buffer[i]);
 	}
 }
 
