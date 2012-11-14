@@ -15,20 +15,17 @@ void setupTimerInterruption(void)
     TCCR1B = 0;     // same for TCCR1B
  
     // set compare match register to desired timer count:
-    OCR1A = 15624;
+    OCR1A = 40;
     //OCR1A = 15624;
-			
+                        
     // turn on CTC mode:
     sbi(TCCR1B, WGM12);
 
     // prescaler = 8
-    //sbi(TCCR1B, CS11);
+    sbi(TCCR1B, CS11);
 
-    TCCR1B |= (1 << CS10);
-    TCCR1B |= (1 << CS12);
-
-    // enable timer compare interrupt:
-    sbi(TIMSK1, OCIE1A);
+    // disable timer compare interrupt in initial state:
+    TIMSK1 = 0;
     
     sei();          // enable global interrupts  
 }
@@ -52,6 +49,9 @@ void setupADC()
 
 void setupAnalogComparator(void)
 {
+  
+    cli();          // disable global interrupts
+    
     /*
         Switch on analog comparator power.
     */
@@ -94,6 +94,15 @@ void setupAnalogComparator(void)
     */
     sbi(DIDR1, AIN1D);
     sbi(DIDR1, AIN0D);
+
+    /*
+        Configure PortB direction - B5 is output
+    */
+    DDRB = 0x20;
+
+    
+    sei(); // enable global interrupts 
+
 }
 
 void startAnalogComparator(void)

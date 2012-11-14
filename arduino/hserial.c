@@ -135,7 +135,8 @@ void hs_init(){
 	#endif
 }
 
-void hs_start(const int port, unsigned long baud){
+void hs_start(const int port, unsigned long baud)
+{
 	*Serial_[port].ubrrh = ((F_CPU / 16 + baud / 2) / baud - 1) >> 8;
 	*Serial_[port].ubrrl = ((F_CPU / 16 + baud / 2) / baud - 1);
 	
@@ -150,19 +151,24 @@ void hs_start(const int port, unsigned long baud){
 	sbi(*Serial_[port].ucsrb, Serial_[port].rxcie);*/
 }
 
-uint8_t hs_available(const int port){
+uint8_t hs_available(const int port)
+{
 	return (RX_BUFFER_SIZE + Serial_[port].rx_buffer->head -
 			Serial_[port].rx_buffer->tail) % RX_BUFFER_SIZE;
 }
 
-int hs_getChar(const int port){
+int hs_getChar(const int port)
+{
 	/*
 	 * If the head isn't ahead of the tail,
 	 * we don't have any characters
 	 */
-	if (Serial_[port].rx_buffer->head == Serial_[port].rx_buffer->tail) {
+	if (Serial_[port].rx_buffer->head == Serial_[port].rx_buffer->tail) 
+	{
 		return -1;
-	} else {
+	} 
+	else
+	{
 		unsigned char c =
 			Serial_[port].rx_buffer->buffer[Serial_[port].rx_buffer->tail];
 		Serial_[port].rx_buffer->tail =
@@ -171,17 +177,20 @@ int hs_getChar(const int port){
 	}
 }
 
-void hs_flush(const int port){
+void hs_flush(const int port)
+{
 	Serial_[port].rx_buffer->head =
 			Serial_[port].rx_buffer->tail;
 }
 
-void hs_writeChar(const int port, uint8_t c){
+void hs_writeChar(const int port, uint8_t c)
+{
 	while (!((*Serial_[port].ucsra) & (1 << Serial_[port].udre)));
 	*(Serial_[port].udr) = c;
 }
 
-void hs_writeBuffer(const int port, uint8_t buffer[], int length){
+void hs_writeBuffer(const int port, uint8_t buffer[], int length)
+{	
 	int i;
 	for(i = 0; i < length; i++)
 	{
@@ -189,16 +198,19 @@ void hs_writeBuffer(const int port, uint8_t buffer[], int length){
 	}
 }
 
-void hs_writeStr(const int port, const char str[]){
+void hs_writeStr(const int port, const char str[])
+{
 	hs_parseStr(port, str);
 }
 
-void hs_parseStr(const int port, const char *str){
+void hs_parseStr(const int port, const char *str)
+{
 	  while (*str)
-	    hs_writeChar(port, *str++);
+	  	hs_writeChar(port, *str++);
 }
 
-inline void store_char(unsigned char c, ring_buffer_t *rx_buffer){
+inline void store_char(unsigned char c, ring_buffer_t *rx_buffer)
+{
 	int i = (rx_buffer->head + 1) % RX_BUFFER_SIZE;
 	// if we should be storing the received character into the location
 	// just before the tail (meaning that the head would advance to the

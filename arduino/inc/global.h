@@ -7,7 +7,7 @@
 #define EXTERN extern	/* declares external variables */
 #endif
 
-#define ANALOG_0 1
+#define ADC_IN 1
 
 #define SERIAL_PORT 0	
 #define BAUD 57600
