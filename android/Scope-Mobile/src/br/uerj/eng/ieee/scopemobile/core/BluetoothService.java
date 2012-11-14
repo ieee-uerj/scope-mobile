@@ -321,20 +321,16 @@ public class BluetoothService {
 					
 					for (int i = 0; i < bytes; i ++)
 					{
-						if (buffer[i] == 'A')
-						{	
-							Log.i(Globals.TAG, "Valor Final do Counter: "+(counter));
-							counter = 0;
-							mHandler.obtainMessage(Globals.MESSAGE_READ, counter, -1, intValues).sendToTarget();
-						}
-						else
-						{
 							int cast = (int)(buffer[i] & 0xff);
 							
 							Log.i(Globals.TAG, "Valor Conversor A/D: "+cast);
-							intValues[counter] = cast;
-							Log.i(Globals.TAG, "Valor do Counter: "+(counter++));
-						}
+							intValues[counter++] = cast;
+							Log.i(Globals.TAG, "Valor do Counter: "+(counter));
+							if (counter >= 500)
+							{
+								mHandler.obtainMessage(Globals.MESSAGE_READ, counter, -1, intValues).sendToTarget();
+								counter = 0;
+							}
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

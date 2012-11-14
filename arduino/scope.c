@@ -48,7 +48,10 @@ ISR(TIMER1_COMPA_vect)
 
 ISR(ANALOG_COMP_vect)
 {
-	comparator_isr();
+	if (bit_is_clear(ACSR, ACO))
+	{
+		comparator_isr();
+	}
 }
 
 	
