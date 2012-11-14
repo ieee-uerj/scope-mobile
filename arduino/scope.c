@@ -17,11 +17,10 @@ int main (int argc, char * argv[]) {
 
 	setupAnalogComparator();
 	setupTimerInterruption();
-
-	startAnalogComparator();	
-
 	setupADC();
 
+	startAnalogComparator();	
+	
 	hs_init();
 	
 	hs_start(SERIAL_PORT, BAUD);
@@ -36,7 +35,6 @@ int main (int argc, char * argv[]) {
 			// stopIndex = -1;
 			startAnalogComparator();
 			freeze = 0;
-
 		}
 	}
 
