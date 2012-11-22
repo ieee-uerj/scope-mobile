@@ -9,37 +9,32 @@
 #include "handlers.h"
 #include "adc.h"
 
-int j;
-
 int main (int argc, char * argv[]) {
 
 	counter = 0;
-	stopIndex = -1;
 	freeze = 0;
-	
+	// stopIndex = -1;
+
+	setupAnalogComparator();
+	setupTimerInterruption();
 	setupADC();
 
+	startAnalogComparator();	
+	
 	hs_init();
 	
 	hs_start(SERIAL_PORT, BAUD);
-	setupTimerInterruption();
-
-	setupAnalogComparator();
-	startAnalogComparator();
 	
 	for(;;)
 	{
 		if (freeze)
 		{
-			stopTimerInterruption();
-			stopAnalogComparator();
-			hs_writeChar(SERIAL_PORT, 'A');
 			hs_writeBuffer(SERIAL_PORT, u8Vector, SIZE_ARRAY);
+			_delay_ms(100);
 			counter = 0;
-			stopIndex = -1;
-			freeze = 0;
+			// stopIndex = -1;
 			startAnalogComparator();
-			startTimerInterruption();
+			freeze = 0;
 		}
 	}
 
@@ -53,7 +48,10 @@ ISR(TIMER1_COMPA_vect)
 
 ISR(ANALOG_COMP_vect)
 {
-	comparator_isr();
+	if (bit_is_clear(ACSR, ACO))
+	{
+		comparator_isr();
+	}
 }
 
 	
