@@ -16,7 +16,6 @@
 #define WAIT_DURATION SIZE_ARRAY - 32
 
 EXTERN volatile int freeze;
-EXTERN volatile int stopIndex;
 EXTERN volatile int counter;
 EXTERN uint8_t u8Value;
 EXTERN uint8_t u8Vector[SIZE_ARRAY];

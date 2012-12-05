@@ -15,6 +15,9 @@
 
 #include "hserial.h"
 
+int toggle = 0;
+int i = 0;
+
 // function prototypes
 void hs_parseStr(const int port, const char *str);
 inline void store_char(unsigned char c, ring_buffer_t *rx_buffer);
@@ -26,7 +29,7 @@ inline void store_char(unsigned char c, ring_buffer_t *rx_buffer);
 								 { { 0 }, 0, 0 }
 								 { { 0 }, 0, 0 } };
 #else
-	ring_buffer_t rx_buffer[1] =  { { { 0 }, 0, 0 } };
+	ring_buffer_t rx_buffer[1] =  { { { 0 }, 0, 0, 0 } };
 #endif
 
 // serial macros
@@ -70,6 +73,39 @@ SIGNAL(USART_RX_vect)
 	unsigned char c = UDR0;
 #endif
   store_char(c, &rx_buffer[0]);
+
+  //if ( Serial_[0].rx_buffer->count == 5 )
+  //{
+
+  	if (rx_buffer->buffer[0] == 'A')
+  	{
+  		sbi(PORTB, PORTB5);
+  	}
+  	else if(rx_buffer->buffer[1] == 'B')
+  	{
+  		cbi(PORTB, PORTB5);
+  	}
+  
+	/*if (&rx_buffer[4] == 'A' && &rx_buffer[3] == '%' && &rx_buffer[2] == 'M' && &rx_buffer[1] == 'P' && &rx_buffer[0] == '%')
+	{
+  		sbi(PORTB, PORTB5);
+  	}
+  	else
+  	{
+  		cbi(PORTB, PORTB5);
+  	}*/	
+  //}
+
+  /*if (toggle == 0)
+  {
+  	cbi(PORTB, PORTB5);
+  	toggle = 1;
+  }
+  else
+  {
+  	sbi(PORTB, PORTB5);
+  	toggle = 0;
+  }*/
 }
 #endif
 
@@ -173,6 +209,7 @@ int hs_getChar(const int port)
 			Serial_[port].rx_buffer->buffer[Serial_[port].rx_buffer->tail];
 		Serial_[port].rx_buffer->tail =
 			(Serial_[port].rx_buffer->tail + 1) % RX_BUFFER_SIZE;
+		Serial_[port].rx_buffer->count--;	
 		return c;
 	}
 }
@@ -219,5 +256,6 @@ inline void store_char(unsigned char c, ring_buffer_t *rx_buffer)
 	if (i != rx_buffer->tail) {
 		rx_buffer->buffer[rx_buffer->head] = c;
 		rx_buffer->head = i;
+		rx_buffer->count++;
 	}
 }

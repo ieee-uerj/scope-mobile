@@ -18,6 +18,7 @@
 #undef OWNER
 #endif
 #include "global.h"
+#include "interruptions.h"
 
 #define RX_BUFFER_SIZE 128
 
@@ -25,6 +26,7 @@ typedef struct _ring_buffer {
 	unsigned char buffer[RX_BUFFER_SIZE];
 	int head;
 	int tail;
+    int count;
 } ring_buffer_t;
 
 typedef struct _hserial {
@@ -34,9 +36,9 @@ typedef struct _hserial {
     volatile uint8_t *ucsra;
     volatile uint8_t *ucsrb;
     volatile uint8_t *udr;
-    uint8_t rxen;
-    uint8_t txen;
-    uint8_t rxcie;
+    volatile uint8_t rxen;
+    volatile uint8_t txen;
+    volatile uint8_t rxcie;
     uint8_t udre;
 } hserial;
 

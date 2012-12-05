@@ -13,7 +13,6 @@ int main (int argc, char * argv[]) {
 
 	counter = 0;
 	freeze = 0;
-	// stopIndex = -1;
 
 	setupAnalogComparator();
 	setupTimerInterruption();
@@ -32,7 +31,6 @@ int main (int argc, char * argv[]) {
 			hs_writeBuffer(SERIAL_PORT, u8Vector, SIZE_ARRAY);
 			_delay_ms(100);
 			counter = 0;
-			// stopIndex = -1;
 			startAnalogComparator();
 			freeze = 0;
 		}
@@ -43,6 +41,7 @@ int main (int argc, char * argv[]) {
 
 ISR(TIMER1_COMPA_vect)
 {
+	hs_start(SERIAL_PORT, BAUD);
     timer_isr();
 }
 
