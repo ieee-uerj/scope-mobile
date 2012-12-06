@@ -5,18 +5,24 @@ General setup for interruptions
 
 #include "interruptions.h"
 
-void setupTimerInterruption(void)
+void setupTimerInterruption(int timer_count)
 {
 	//(target time) = (timer resolution) * (# timer counts + 1) -> # timer counts
     // initialize Timer1 48kHz
+    /* 
+    Default values: 
+    prescaler = 8
+    timer resolution = 1/(16Mhz/8) = 0,5 us
+    target time = 20us
+    timer count = 40
+    */
     cli();          // disable global interrupts
     
     TCCR1A = 0;     // set entire TCCR1A register to 0
     TCCR1B = 0;     // same for TCCR1B
  
     // set compare match register to desired timer count:
-    OCR1A = 40;
-    //OCR1A = 15624;
+    OCR1A = timer_count;
                         
     // turn on CTC mode:
     sbi(TCCR1B, WGM12);

@@ -15,7 +15,7 @@ int main (int argc, char * argv[]) {
 	freeze = 0;
 
 	setupAnalogComparator();
-	setupTimerInterruption();
+	setupTimerInterruption(DEFAULT_TIMER_COUNT);
 	setupADC();
 
 	startAnalogComparator();	

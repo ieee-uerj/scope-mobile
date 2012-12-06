@@ -23,7 +23,7 @@ Interruption Functions' prototypes
 /* 	Initial setup of timer interruption    *
  *  Parameters:  nothing                   *
  *  Returns:     nothing                   */
-void setupTimerInterruption();
+void setupTimerInterruption(int timer_count);
 
 /* 	Start timer interruption		*
  *  Parameters:  nothing            *

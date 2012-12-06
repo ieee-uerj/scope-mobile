@@ -29,7 +29,7 @@ inline void store_char(unsigned char c, ring_buffer_t *rx_buffer);
 								 { { 0 }, 0, 0 }
 								 { { 0 }, 0, 0 } };
 #else
-	ring_buffer_t rx_buffer[1] =  { { { 0 }, 0, 0, 0 } };
+	ring_buffer_t rx_buffer[1] =  { { { 0 }, 0, 0} };
 #endif
 
 // serial macros
@@ -74,38 +74,32 @@ SIGNAL(USART_RX_vect)
 #endif
   store_char(c, &rx_buffer[0]);
 
-  //if ( Serial_[0].rx_buffer->count == 5 )
-  //{
-
-  	if (rx_buffer->buffer[0] == 'A')
-  	{
+  /*if (rx_buffer->buffer[0] == 'A')
+  {
   		sbi(PORTB, PORTB5);
-  	}
-  	else if(rx_buffer->buffer[1] == 'B')
-  	{
-  		cbi(PORTB, PORTB5);
-  	}
-  
-	/*if (&rx_buffer[4] == 'A' && &rx_buffer[3] == '%' && &rx_buffer[2] == 'M' && &rx_buffer[1] == 'P' && &rx_buffer[0] == '%')
-	{
-  		sbi(PORTB, PORTB5);
-  	}
-  	else
-  	{
-  		cbi(PORTB, PORTB5);
-  	}*/	
-  //}
-
-  /*if (toggle == 0)
+  }
+  else if(rx_buffer->buffer[1] == 'B')
   {
   	cbi(PORTB, PORTB5);
-  	toggle = 1;
-  }
-  else
-  {
-  	sbi(PORTB, PORTB5);
-  	toggle = 0;
   }*/
+
+  #if !(defined(__AVR_ATmega8__))
+	  if ( (&rx_buffer[0])->head > MASSIVE_COMMAND_SIZE)
+	  {
+		/*
+		Only copy to command_buffer if we have at least MASSIVE_COMMAND_SIZE in rx_buffer.
+		*/
+
+	  	for (i = 0; i<MASSIVE_COMMAND_SIZE; i++)
+	  	{
+	  		/*
+			Copy all command data to command_buffer to be processed later.
+			*/
+	  		command_buffer[i] = (&rx_buffer[0])->buffer[i];
+	  	}
+
+	  }
+  #endif
 }
 #endif
 
@@ -209,7 +203,6 @@ int hs_getChar(const int port)
 			Serial_[port].rx_buffer->buffer[Serial_[port].rx_buffer->tail];
 		Serial_[port].rx_buffer->tail =
 			(Serial_[port].rx_buffer->tail + 1) % RX_BUFFER_SIZE;
-		Serial_[port].rx_buffer->count--;	
 		return c;
 	}
 }
@@ -256,6 +249,5 @@ inline void store_char(unsigned char c, ring_buffer_t *rx_buffer)
 	if (i != rx_buffer->tail) {
 		rx_buffer->buffer[rx_buffer->head] = c;
 		rx_buffer->head = i;
-		rx_buffer->count++;
 	}
 }

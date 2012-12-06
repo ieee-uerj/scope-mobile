@@ -7,6 +7,6 @@
 
 #include "global.h"
 
-uint8_t adc_read(uint8_t channel);
+void parse(unsigned char command_buffer[MASSIVE_COMMAND_SIZE]);
 
 #endif

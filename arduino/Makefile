@@ -27,7 +27,7 @@ F_CPU = 16000000L
 FORMAT = ihex
 
 #Source Settings
-SOURCE = scope.c adc.c hserial.c handlers.c interruptions.c
+SOURCE = scope.c adc.c hserial.c handlers.c interruptions.c ./massive-receiver/*
 CFLAGS =  -Wp, -w -Os 
 CINCS = -I./inc
 BIN = bin/scope

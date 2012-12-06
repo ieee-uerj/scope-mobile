@@ -26,7 +26,6 @@ typedef struct _ring_buffer {
 	unsigned char buffer[RX_BUFFER_SIZE];
 	int head;
 	int tail;
-    int count;
 } ring_buffer_t;
 
 typedef struct _hserial {
