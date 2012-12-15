@@ -1,4 +1,4 @@
-#include "dispatcher.h"
+#include "commands.h"
 
 void set_sampling_rate(int new_sr)
 {

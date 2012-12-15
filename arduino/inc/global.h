@@ -27,4 +27,8 @@ EXTERN volatile int freeze;
 EXTERN volatile int counter;
 EXTERN uint8_t u8Value;
 EXTERN uint8_t u8Vector[SIZE_ARRAY];
+
+/*Massive Receiver API buffers*/
 EXTERN volatile unsigned char command_buffer[MASSIVE_COMMAND_SIZE];
+EXTERN volatile unsigned char command_id[MASSIVE_MAX_COMMAND_IDENTIFIER];
+EXTERN volatile unsigned char command_params[MASSIVE_MAX_COMMAND_PARAMS];

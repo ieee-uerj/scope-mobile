@@ -5,9 +5,6 @@ void parse(unsigned char command_buffer[MASSIVE_COMMAND_SIZE])
 	int i, j, k;
 	i, j, k = 0;
 	
-	char command_id[MASSIVE_MAX_COMMAND_IDENTIFIER] = {'0'};
-	char command_params[MASSIVE_MAX_COMMAND_PARAMS] = {'0'};
-
 	if (command_buffer[0] == MASSIVE_SEPARATE_CHAR) /*Is a valid command, i.e., starts with MASSIVE_SEPARATE_CHAR ?*/
 	{
 		for (i=1; i<MASSIVE_COMMAND_SIZE; i++)

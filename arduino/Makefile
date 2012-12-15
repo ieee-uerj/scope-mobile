@@ -28,7 +28,7 @@ FORMAT = ihex
 
 #Source Settings
 SOURCE = scope.c adc.c hserial.c handlers.c interruptions.c ./massive-receiver/*
-CFLAGS =  -Wp, -w -Os 
+CFLAGS =  -Wp,-w -Os
 CINCS = -I./inc
 BIN = bin/scope
 HEX = hex/scope.hex

@@ -1,5 +1,5 @@
-#ifndef __DISPATCHER_H__
-#define __DISPATCHER_H__
+#ifndef __COMMANDS_H__
+#define __COMMANDS_H__
 
 #include <stdio.h>
 
