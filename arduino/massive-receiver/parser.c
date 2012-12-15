@@ -1,10 +1,11 @@
 #include "parser.h"
 
-void parse(unsigned char command_buffer[MASSIVE_COMMAND_SIZE])
+void parse(char command_buffer[])
 {
-	int i, j, k;
-	i, j, k = 0;
-	
+	int i, j;
+	i = 0;
+	j = 0;
+
 	if (command_buffer[0] == MASSIVE_SEPARATE_CHAR) /*Is a valid command, i.e., starts with MASSIVE_SEPARATE_CHAR ?*/
 	{
 		for (i=1; i<MASSIVE_COMMAND_SIZE; i++)
@@ -15,6 +16,7 @@ void parse(unsigned char command_buffer[MASSIVE_COMMAND_SIZE])
 				command_id[j] = command_buffer[i];
 				j++;
 			}else{
+				command_id[j] = '\0';
 				break;
 			}
 		}
@@ -26,5 +28,6 @@ void parse(unsigned char command_buffer[MASSIVE_COMMAND_SIZE])
 			command_params[j] = command_buffer[i];
 			j++;
 		}
+		command_id[j] = '\0';
 	}
 }

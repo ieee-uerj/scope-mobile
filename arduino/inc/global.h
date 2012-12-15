@@ -17,9 +17,9 @@
 
 /*Massive Receiver API constants*/
 #define MASSIVE_COMMAND_SIZE 6
-#define MASSIVE_MAX_COMMAND_IDENTIFIER 1
+#define MASSIVE_MAX_COMMAND_IDENTIFIER 2 /* Counting with '\0' */
 #define MASSIVE_SEPARATE_CHAR '%'
-#define MASSIVE_MAX_COMMAND_PARAMS 3
+#define MASSIVE_MAX_COMMAND_PARAMS 4 /* Counting with '\0' */
 
 #define DEFAULT_TIMER_COUNT 40
 
@@ -29,6 +29,6 @@ EXTERN uint8_t u8Value;
 EXTERN uint8_t u8Vector[SIZE_ARRAY];
 
 /*Massive Receiver API buffers*/
-EXTERN volatile unsigned char command_buffer[MASSIVE_COMMAND_SIZE];
-EXTERN volatile unsigned char command_id[MASSIVE_MAX_COMMAND_IDENTIFIER];
-EXTERN volatile unsigned char command_params[MASSIVE_MAX_COMMAND_PARAMS];
+EXTERN volatile char command_buffer[MASSIVE_COMMAND_SIZE];
+EXTERN volatile char command_id[MASSIVE_MAX_COMMAND_IDENTIFIER];
+EXTERN volatile char command_params[MASSIVE_MAX_COMMAND_PARAMS];

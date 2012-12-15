@@ -7,6 +7,6 @@
 
 #include "global.h"
 
-void parse(unsigned char command_buffer[MASSIVE_COMMAND_SIZE]);
+void parse(char command_buffer[]);
 
 #endif
