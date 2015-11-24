@@ -4,6 +4,7 @@ Smart oscilloscope developed for Android platform. It has two components: A soft
 
 Maintainers:
 -----------
+* Lisandro Lovisolo - Author and Advisor
 * Renan Prata - Author
 * Flávio Schuindt - Author
 * Michel Tcheou - Collaborator 
