@@ -17,31 +17,31 @@
 ###############################################################################
 
 #Compiler Settings
-CC = avr-gcc
-OBJCOPY = avr-objcopy
-AVRDUDE = avrdude
+CC =avr-gcc
+OBJCOPY =avr-objcopy
+AVRDUDE =avrdude
 
 #MCU Settings
-MCU = atmega328p
-F_CPU = 16000000L
-FORMAT = ihex
+MCU =atmega328p
+F_CPU =16000000L
+FORMAT =ihex
 
 #Source Settings
-SOURCE = scope.c adc.c hserial.c handlers.c interruptions.c
-CFLAGS =  -Wp, -w -Os 
-CINCS = -I./inc
-BIN = bin/scope
-HEX = hex/scope.hex
-MKDIR_P = mkdir -p bin/ hex/
-RM_RF = rm -rf bin/ hex/
+SOURCE =scope.c adc.c hserial.c handlers.c interruptions.c
+CFLAGS =-w -Os 
+CINCS =-I./inc
+BIN =bin/scope
+HEX =hex/scope.hex
+MKDIR_P =mkdir -p bin/ hex/
+RM_RF =rm -rf bin/ hex/
 	
 #Upload Settings
-AVRDUDE_PROGRAMMER = arduino
-AVR_PORT = /dev/ttyUSB0
-AVRDUDE_FLAGS = -F -V 
-AVRDUDE_FLASH = -U flash:w:$(HEX)
-UPLOAD_RATE_DUEMILANOVE = 57600
-UPLOAD_RATE_UNO = 115200
+AVRDUDE_PROGRAMMER =arduino
+AVR_PORT =/dev/ttyUSB0
+AVRDUDE_FLAGS =-F -V 
+AVRDUDE_FLASH =-U flash:w:$(HEX)
+UPLOAD_RATE_DUEMILANOVE =57600
+UPLOAD_RATE_UNO =115200
 
 all:
 	$(MKDIR_P)
